@@ -5,7 +5,7 @@ const { generateQuiz: generateQuizService } = require('../services/quizService')
 
 exports.generateQuiz = async (req, res) => {
   try {
-    const note = await Note.findOne({ _id: req.params.noteId, userId: req.userId });
+    const note = await Note.findOne({ _id: req.params.noteId });
     if (!note) {
       return res.status(404).json({ message: 'Note not found' });
     }
@@ -13,7 +13,6 @@ exports.generateQuiz = async (req, res) => {
     const questions = await generateQuizService(note.extractedText, 5);
 
     const quiz = await Quiz.create({
-      userId: req.userId,
       noteId: note._id,
       questions: questions.map(q => ({
         type: q.type,
@@ -36,7 +35,7 @@ exports.generateQuiz = async (req, res) => {
 
 exports.submitQuiz = async (req, res) => {
   try {
-    const quiz = await Quiz.findOne({ _id: req.params.quizId, userId: req.userId });
+    const quiz = await Quiz.findOne({ _id: req.params.quizId });
     if (!quiz) {
       return res.status(404).json({ message: 'Quiz not found' });
     }
@@ -63,7 +62,7 @@ exports.submitQuiz = async (req, res) => {
       const accuracy = (score / quiz.totalQuestions) * 100;
       for (const topic of note.keyConcepts) {
         await WeakTopic.findOneAndUpdate(
-          { userId: req.userId, topic },
+          { topic },
           {
             $inc: { totalAttempts: 1, correctAttempts: accuracy >= 60 ? 1 : 0 },
             $set: {
@@ -78,7 +77,7 @@ exports.submitQuiz = async (req, res) => {
       }
 
       
-      const weakTopics = await WeakTopic.find({ userId: req.userId });
+      const weakTopics = await WeakTopic.find({});
       for (const wt of weakTopics) {
         wt.accuracy = wt.totalAttempts > 0
           ? Math.round((wt.correctAttempts / wt.totalAttempts) * 100)
@@ -95,7 +94,7 @@ exports.submitQuiz = async (req, res) => {
 
 exports.getQuizHistory = async (req, res) => {
   try {
-    const quizzes = await Quiz.find({ userId: req.userId })
+    const quizzes = await Quiz.find({})
       .populate('noteId', 'title')
       .sort({ createdAt: -1 });
 
@@ -107,7 +106,7 @@ exports.getQuizHistory = async (req, res) => {
 
 exports.getQuizById = async (req, res) => {
   try {
-    const quiz = await Quiz.findOne({ _id: req.params.id, userId: req.userId })
+    const quiz = await Quiz.findOne({ _id: req.params.id })
       .populate('noteId', 'title extractedText');
 
     if (!quiz) {

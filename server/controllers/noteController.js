@@ -20,7 +20,6 @@ exports.uploadNote = async (req, res) => {
     const explanationData = await generateExplanation(extractedText, language);
 
     const note = await Note.create({
-      userId: req.userId,
       title,
       originalImage: `/uploads/${req.file.filename}`,
       extractedText,
@@ -47,12 +46,12 @@ exports.getNotes = async (req, res) => {
     const limit = parseInt(req.query.limit) || 10;
     const skip = (page - 1) * limit;
 
-    const notes = await Note.find({ userId: req.userId })
+    const notes = await Note.find({})
       .sort({ createdAt: -1 })
       .skip(skip)
       .limit(limit);
 
-    const total = await Note.countDocuments({ userId: req.userId });
+    const total = await Note.countDocuments({});
 
     res.json({
       notes,
@@ -67,7 +66,7 @@ exports.getNotes = async (req, res) => {
 
 exports.getNoteById = async (req, res) => {
   try {
-    const note = await Note.findOne({ _id: req.params.id, userId: req.userId });
+    const note = await Note.findOne({ _id: req.params.id });
     if (!note) {
       return res.status(404).json({ message: 'Note not found' });
     }
@@ -87,7 +86,7 @@ exports.getNoteById = async (req, res) => {
 
 exports.deleteNote = async (req, res) => {
   try {
-    const note = await Note.findOneAndDelete({ _id: req.params.id, userId: req.userId });
+    const note = await Note.findOneAndDelete({ _id: req.params.id });
     if (!note) {
       return res.status(404).json({ message: 'Note not found' });
     }
@@ -105,7 +104,6 @@ exports.searchNotes = async (req, res) => {
     }
 
     const notes = await Note.find({
-      userId: req.userId,
       $text: { $search: q }
     }).sort({ score: { $meta: 'textScore' } });
 

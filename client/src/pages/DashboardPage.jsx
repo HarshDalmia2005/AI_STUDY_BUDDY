@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
+
 import { useTheme } from '../context/ThemeContext';
 import { analyticsAPI } from '../services/api';
 import {
@@ -9,7 +9,6 @@ import {
 } from 'lucide-react';
 
 export default function DashboardPage() {
-  const { user } = useAuth();
   const { dark } = useTheme();
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -44,7 +43,7 @@ export default function DashboardPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className={`text-3xl font-bold ${dark ? 'text-white' : 'text-surface-900'}`}>
-            Welcome back, <span className="gradient-text">{user?.name?.split(' ')[0]}</span> 👋
+            Welcome back, <span className="gradient-text">Student</span> 👋
           </h1>
           <p className={`mt-1 ${dark ? 'text-surface-200/50' : 'text-surface-600'}`}>
             Here's your learning progress at a glance

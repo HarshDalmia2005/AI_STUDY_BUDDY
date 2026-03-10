@@ -1,9 +1,9 @@
 import { NavLink, useNavigate } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
+
 import { useTheme } from '../../context/ThemeContext';
 import {
   LayoutDashboard, Upload, FileText, Brain, BarChart3,
-  LogOut, Moon, Sun, GraduationCap, ChevronLeft, ChevronRight
+  Moon, Sun, GraduationCap, ChevronLeft, ChevronRight
 } from 'lucide-react';
 import { useState } from 'react';
 
@@ -16,15 +16,9 @@ const navItems = [
 ];
 
 export default function Sidebar() {
-  const { user, logout } = useAuth();
   const { dark, toggleTheme } = useTheme();
   const navigate = useNavigate();
   const [collapsed, setCollapsed] = useState(false);
-
-  const handleLogout = () => {
-    logout();
-    navigate('/');
-  };
 
   return (
     <aside className={`${collapsed ? 'w-20' : 'w-64'} h-screen fixed left-0 top-0 z-40 flex flex-col transition-all duration-300 
@@ -80,25 +74,17 @@ export default function Sidebar() {
         </button>
 
         {}
-        {user && (
-          <div className={`flex items-center gap-3 px-4 py-3 rounded-xl
+        <div className={`flex items-center gap-3 px-4 py-3 rounded-xl
             ${dark ? 'bg-white/5' : 'bg-surface-50'}`}>
             <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary-400 to-purple-500 flex items-center justify-center flex-shrink-0">
-              <span className="text-white text-sm font-bold">{user.name?.charAt(0).toUpperCase()}</span>
+              <span className="text-white text-sm font-bold">S</span>
             </div>
             {!collapsed && (
               <div className="flex-1 min-w-0">
-                <p className={`text-sm font-medium truncate ${dark ? 'text-white' : 'text-surface-900'}`}>{user.name}</p>
+                <p className={`text-sm font-medium truncate ${dark ? 'text-white' : 'text-surface-900'}`}>Student</p>
               </div>
             )}
-            {!collapsed && (
-              <button onClick={handleLogout}
-                className="text-red-400 hover:text-red-300 transition-colors" title="Logout">
-                <LogOut size={18} />
-              </button>
-            )}
           </div>
-        )}
       </div>
     </aside>
   );

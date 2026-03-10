@@ -3,7 +3,7 @@ const router = express.Router();
 const multer = require('multer');
 const path = require('path');
 const { uploadNote, getNotes, getNoteById, deleteNote, searchNotes } = require('../controllers/noteController');
-const auth = require('../middleware/auth');
+
 
 
 const storage = multer.diskStorage({
@@ -27,10 +27,10 @@ const fileFilter = (req, file, cb) => {
 
 const upload = multer({ storage, fileFilter, limits: { fileSize: 10 * 1024 * 1024 } }); 
 
-router.post('/upload', auth, upload.single('note'), uploadNote);
-router.get('/', auth, getNotes);
-router.get('/search', auth, searchNotes);
-router.get('/:id', auth, getNoteById);
-router.delete('/:id', auth, deleteNote);
+router.post('/upload', upload.single('note'), uploadNote);
+router.get('/', getNotes);
+router.get('/search', searchNotes);
+router.get('/:id', getNoteById);
+router.delete('/:id', deleteNote);
 
 module.exports = router;

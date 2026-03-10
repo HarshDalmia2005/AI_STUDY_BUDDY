@@ -6,7 +6,7 @@ require('dotenv').config({ path: path.join(__dirname, '../.env') });
 
 const connectDB = require('./config/db');
 
-const authRoutes = require('./routes/authRoutes');
+
 const noteRoutes = require('./routes/noteRoutes');
 const quizRoutes = require('./routes/quizRoutes');
 const analyticsRoutes = require('./routes/analyticsRoutes');
@@ -26,7 +26,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/uploads', express.static(uploadsDir));
 
 
-app.use('/api/auth', authRoutes);
+
 app.use('/api/notes', noteRoutes);
 app.use('/api/quiz', quizRoutes);
 app.use('/api/analytics', analyticsRoutes);
