@@ -29,12 +29,8 @@ export default function LandingPage() {
             <span className="text-xl font-bold gradient-text">MentorMate</span>
           </div>
           <div className="flex items-center gap-4">
-            <Link to="/login" className={`px-5 py-2.5 rounded-xl text-sm font-medium transition-all
-              ${dark ? 'text-surface-200 hover:text-white hover:bg-white/5' : 'text-surface-700 hover:text-primary-600'}`}>
-              Log In
-            </Link>
-            <Link to="/signup" className="px-5 py-2.5 rounded-xl text-sm font-medium bg-gradient-to-r from-primary-500 to-purple-600 text-white hover:shadow-lg hover:shadow-primary-500/25 transition-all hover:-translate-y-0.5">
-              Get Started
+            <Link to="/dashboard" className="px-5 py-2.5 rounded-xl text-sm font-medium bg-gradient-to-r from-primary-500 to-purple-600 text-white hover:shadow-lg hover:shadow-primary-500/25 transition-all hover:-translate-y-0.5">
+              Go to App
             </Link>
           </div>
         </div>
@@ -67,13 +63,9 @@ export default function LandingPage() {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link to="/signup" className="group px-8 py-4 rounded-2xl text-base font-semibold bg-gradient-to-r from-primary-500 to-purple-600 text-white hover:shadow-xl hover:shadow-primary-500/30 transition-all hover:-translate-y-1 flex items-center gap-2">
+            <Link to="/dashboard" className="group px-8 py-4 rounded-2xl text-base font-semibold bg-gradient-to-r from-primary-500 to-purple-600 text-white hover:shadow-xl hover:shadow-primary-500/30 transition-all hover:-translate-y-1 flex items-center gap-2">
               Start Learning Free
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </Link>
-            <Link to="/login" className={`px-8 py-4 rounded-2xl text-base font-semibold transition-all border
-              ${dark ? 'border-surface-700 text-surface-200 hover:bg-white/5' : 'border-surface-300 text-surface-700 hover:bg-surface-50'}`}>
-              I Have an Account
             </Link>
           </div>
         </div>
@@ -118,8 +110,8 @@ export default function LandingPage() {
             <p className={`text-lg mb-8 ${dark ? 'text-surface-200/60' : 'text-surface-600'}`}>
               Join MentorMate and turn your notes into a personalized learning experience
             </p>
-            <Link to="/signup" className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl text-base font-semibold bg-gradient-to-r from-primary-500 to-purple-600 text-white hover:shadow-xl hover:shadow-primary-500/30 transition-all hover:-translate-y-1">
-              Get Started — It's Free
+            <Link to="/dashboard" className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl text-base font-semibold bg-gradient-to-r from-primary-500 to-purple-600 text-white hover:shadow-xl hover:shadow-primary-500/30 transition-all hover:-translate-y-1">
+              Go to Dashboard
               <ArrowRight className="w-5 h-5" />
             </Link>
           </div>
