@@ -65,7 +65,6 @@ connectDB().then(async () => {
     }
   } catch (e) {  }
 
-  // ONLY LISTEN IF NOT DEPLOYED TO VERCEL
   if (!process.env.VERCEL) {
     app.listen(PORT, () => {
       console.log(`🚀 MentorMate server running on port ${PORT}`);
