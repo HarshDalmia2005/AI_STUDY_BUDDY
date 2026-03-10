@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const weakTopicSchema = new mongoose.Schema({
-  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: false },
   topic: { type: String, required: true },
   totalAttempts: { type: Number, default: 0 },
   correctAttempts: { type: Number, default: 0 },

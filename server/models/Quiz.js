@@ -11,7 +11,7 @@ const questionSchema = new mongoose.Schema({
 });
 
 const quizSchema = new mongoose.Schema({
-  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: false },
   noteId: { type: mongoose.Schema.Types.ObjectId, ref: 'Note', required: true },
   questions: [questionSchema],
   score: { type: Number, default: 0 },

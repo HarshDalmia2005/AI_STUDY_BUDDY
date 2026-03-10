@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const noteSchema = new mongoose.Schema({
-  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: false },
   title: { type: String, required: true, trim: true },
   originalImage: { type: String, required: true },
   extractedText: { type: String, default: '' },
